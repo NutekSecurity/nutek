@@ -1,7 +1,8 @@
 ##!/usr/bin/env bash
 
 if ! [[ "$(uname -s)" == "Darwin" ]]; then
-    echo "🚀 This script is temporairly for macOS only and need some Polish.\nPress [Return ⏎] to exit"
+    echo "🚀 This script is temporairly for macOS only and need some Polish."
+    echo "Press [Return ⏎] to exit"
     exit 1
 fi
 
@@ -44,7 +45,6 @@ packages_to_install=(
    "podman" # - docker alternative
    "act" # - run GitHub workflows locally
    "neovim" # - text editor
-   "openvpn" # - vpn client
    "irssi" # - irc client
    "dos2unix" # - convert dos to unix
    "ipcalc" # - ip calculator
@@ -79,11 +79,8 @@ packages_to_install=(
    "exploitdb" # - exploit database
    "asciinema" # - terminal recorder
    "agg" # - ascii art generator
-   "hashcat" # - password cracker
-   "john-jumbo" # - password cracker
    "crunch" # - wordlist generator
    "mdbook" # - book generator
-   "hydra" # - break in over network protocols
    "rustscan" # - fast nmap scan (CTF)
    "sqlmap" # - automated SQL Injection
    "bettercap" # - network attacks
