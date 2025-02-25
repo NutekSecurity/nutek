@@ -117,8 +117,6 @@ packages_to_install=(
 echo "Packages to install:"
 printf '%s\n' "${packages_to_install[@]}"
 
-exit
-
 not_installed=()
 
 # Install Rosetta 2

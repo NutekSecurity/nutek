@@ -1,6 +1,6 @@
 [package]
 name = "nutek"
-version = "1.0.0"
+version = "1.0.3"
 edition = "2024"
 authors = ["Szymon Błaszczyński <neosb@nuteksecurity.com>"]
 description = "The only h@xor tool you will ever need 🥷."
