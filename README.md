@@ -1,5 +1,7 @@
 # Nutek
 
+The only h@xor tool you will ever need 🥷.
+
 [Github release](https://github.com/NutekSecurity/nutek/releases/tag/v1.0.4) because I don't know how to do it prperly in Rust.
 
 ## Usage
