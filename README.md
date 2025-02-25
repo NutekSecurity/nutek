@@ -9,4 +9,4 @@ cargo install nutek
 nutek
 ```
 
-Black-box for now... Full of surprises. I hope you like it 🐯
+Check out the source code... Full of surprises. I hope you like it 🐯
