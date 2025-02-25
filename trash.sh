@@ -27,17 +27,11 @@ else
     SUDO="sudo"
 fi
 
-# Check if Homebrew is installed by looking for the executable in PATH
-if ! command -v brew &> /dev/null; then
-    echo "❤️ Homebrew not found. Installing..."
-    $SUDO curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/neosb/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    echo "💚 Homebrew is installed."
-else
-    # If already installed, just print a message
-    echo "💚 Homebrew is installed."
-fi
+echo "💛 Installing Homebrew... Or updating if already installed."
+$SUDO curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/neosb/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+echo "💚 Homebrew is installed."
 
 # Cr$SUDO a Bash array (in this case, let's say we want to install some packages)
 packages_to_install=(
@@ -96,6 +90,7 @@ packages_to_install=(
    "podman-desktop" # - docker alternative
    "homebrew/cask/httpie" # - curl alternative
    "pgadmin4" # - database administration
+   "mysqlworkbench" # - database administration
    "imhex" # - hex editor
    "warp" # - terminal
    "alacritty" # - terminal
@@ -128,7 +123,7 @@ fi
 echo "💛 Installing selected programs..."
 for package in "${packages_to_install[@]}"; do
     if [[ "$(uname -s)" == "Darwin" ]]; then
-    $SUDO# For each package, run a command like this: "brew install $package"
+        # For each package, run a command like this: "brew install $package"
         echo "💛 Installing $package..."
         brew install "$package" || { echo "Error installing $package. Aborting..."; not_installed+=( "$package" ); }
         continue
@@ -145,7 +140,7 @@ for package in "${packages_to_install[@]}"; do
     if [[ "$(uname -s)" == "Linux" ]] && command -v packman &> /dev/null; then
         echo "💛 Installing with pacman $package..."
         $SUDO packman --noconfirm -S "$package" ||  echo "$package not in packman. Trying brew..."; brew install "$package"  || { echo "Error installing $package. Aborting..."; not_installed+=( "$package" ); }
-  $SUDO
+    fi
 done
 
 echo "💚 All installing done!"
@@ -159,12 +154,9 @@ echo ""  >> ~/.zshrc
 echo "# NVM" >> ~/.zshrc
 echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc
 echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm' >> ~/.zshrc
-echo `[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion` >> ~/.zshrc
+echo '[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion' >> ~/.zshrc
 source ~/.zshrc
 echo "💚 Setup nvm in ~/.zshrc..."
-
-# Install terminalizer for recording terminal sessions
-yarn global add terminalizer
 
 # Print out the array to see what we're working with
 echo "❤️ Packages not installed:"
