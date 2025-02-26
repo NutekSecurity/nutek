@@ -2,13 +2,22 @@
 
 The only h@xor tool you will ever need 🥷.
 
-[Github release](https://github.com/NutekSecurity/nutek/releases/tag/v1.0.4) because I don't know how to do it prperly in Rust.
+[Gitub release](https://github.com/NutekSecurity/nutek/releases/tag/v1.0.7) because I know how to do it properly in Rust.
 
 ## Usage
 
+using `cargo`:
+
 ```bash
-chmod 744 trash.sh
-./trash.sh
+cargo install nutek
+nutek
+```
+
+or using GitHub release:
+
+```bash
+chmod +x nutek
+./nutek
 ```
 
 ## Supported OS

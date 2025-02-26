@@ -1,6 +1,6 @@
 [package]
 name = "nutek"
-version = "1.0.6"
+version = "1.0.7"
 edition = "2024"
 authors = ["Szymon Błaszczyński <neosb@nuteksecurity.com>"]
 description = "The only h@xor tool you will ever need 🥷."
@@ -10,3 +10,5 @@ categories = ["games"]
 repository = "https://github.com/NutekSecurity/nutek"
 
 [dependencies]
+reqwest = { version = "0.12.12", features = ["blocking"] }
+tokio = { version = "1.43.0", features = ["full"] }
