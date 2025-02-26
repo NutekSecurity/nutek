@@ -2,8 +2,9 @@
 
 if ! [[ "$(uname -s)" == "Darwin" ]]; then
     echo "🚀 This script is temporairly for macOS only and need some Polish."
-    echo "Press [Return ⏎] to exit"
     exit 1
+else
+    echo "💻 You are on macOS"
 fi
 
 
@@ -302,7 +303,11 @@ for i in "${!package_names[@]}"; do
   printf "%2d. %-30s %s\n" "$((i+1))" "${package_names[$i]}" "${package_comments[$i]}"
 done
 
-read -r -p "Enter the numbers of the packages you want to EXCLUDE (comma-separated, or 'all' to exclude all, or press Enter to install all): " exclude_list
+
+# --- Ask the user for input ---
+echo ""
+echo "Enter the numbers of the packages you want to EXCLUDE (comma-separated, or 'all' to exclude all, or press Enter to install all): "
+read -r exclude_list
 
 # --- Process the exclusion input ---
 
@@ -342,10 +347,12 @@ printf '%s\n' "${package_names[@]}"
 
 # Ask the user to confirm before proceeding
 echo ""
-echo "💛 This script will install the above packages using Homebrew."
+echo "💛 This script will install the above packages using Homebrew which will be installed shortly."
 echo "💛 Please review the list of packages to be installed and confirm..."
 
-read -n 1 -r -p "Continue installing above packages? (y/n) " choice
+echo "Continue installing above packages? (y/n) "
+
+read -n 1 -r choice
 echo ""  # Add a newline after the input
 
 case "$choice" in
@@ -366,7 +373,7 @@ esac
 # Install Rosetta 2
 if [[ "$(uname -s)" == "Darwin" ]] && [[ "$(arch)" == "arm64" ]]; then
     echo "💛 Installing Rosetta 2 so all programs can be run, even those for Intel architecture. Please agree to the terms of software license..."
-    $SUDO softwareupdate --install-rosetta
+    $SUDO softwareupdate --install-rosetta --agree-to-license
 fi
 
 # Check if running inside a container
@@ -420,7 +427,6 @@ else
     echo "# ZSH completions" >> ~/.zshrc
     echo 'fpath=($fpath /opt/homebrew/share/zsh/site-functions)' >> ~/.zshrc
     echo "💚 Setup fpath for zsh completions ~/.zshrc..."
-    source ~/.zshrc
 fi
 
 if grep -qF "# NVM" ~/.zshrc; then
@@ -432,7 +438,6 @@ else
     echo '[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm' >> ~/.zshrc
     echo '[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion' >> ~/.zshrc
     echo "💚 Setup nvm in ~/.zshrc..."
-    source ~/.zshrc
 fi
 
-echo "❤️ Done! Press [Return ⏎] to exit"
+echo "❤️ Done! Please restart your terminal."
